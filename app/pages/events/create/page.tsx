@@ -28,10 +28,12 @@ const CreateEventPage: React.FC = () => {
     
     // Here, you would integrate the logic to save the event
     // in your database or global state
-    if(event.name.trim.length > 0 && event.date.trim.length > 0 && event.description.trim.length > 0){
+    if(event.name.trim.length > 0 && event.date.length > 0 && event.description.length > 0){
         console.log('Event Created:', event);
     }
   };
+
+  
 
   return (
     <Format>
