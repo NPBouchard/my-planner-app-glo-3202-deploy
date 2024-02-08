@@ -2,7 +2,6 @@
 import Format from "./components/Format";
 import React, { useState } from "react";
 import Link from "next/link";
-
 // Define the component with TypeScript
 const Page: React.FC = () => {
     const [activeTab, setActiveTab] = useState<string>('fonctionnalites');
