@@ -2,7 +2,8 @@ import Format from "./components/Format";
 import React from "react";
 import Link from "next/link";
 import EventList from "./script/EventList";
-// Define the component with TypeScript
+
+
 const Page: React.FC = () => {
     return (
         <Format>
