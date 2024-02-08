@@ -15,7 +15,7 @@ export default async function EventList(): Promise<JSX.Element> {
             <div className="pb-4">
               <h3 className="text-xl font-semibold">{event.eventname}</h3>
               <p className="text-sm text-gray-500">Organisé par: UserID {event.userid}</p>
-              {/* <p className="text-sm text-gray-500">Date: {event.eventdate}</p> */}
+              <p className="text-sm text-gray-500">Date: {event.eventdate.string()}</p>
               <p className="text-sm text-gray-500">Lieu: {event.eventlocation}</p>
             </div>
             <div>
