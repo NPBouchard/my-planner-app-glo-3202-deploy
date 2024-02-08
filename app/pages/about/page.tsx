@@ -1,6 +1,7 @@
 import React from "react";
 import Format from "@/app/components/Format";
 import PeopleList from "@/app/script/GetPeople";
+import EventList from "@/app/script/EventList";
 
 const AboutPage: React.FC = () => {
     return (
@@ -14,6 +15,7 @@ const AboutPage: React.FC = () => {
                     Notre mission est de fournir une plateforme intuitive et conviviale qui simplifie la gestion d'événements, que ce soit pour des réunions familiales, des conférences professionnelles, ou des rassemblements sociaux.
                 </p>
             </div>
+            <EventList />
         </Format>
     );
 };
