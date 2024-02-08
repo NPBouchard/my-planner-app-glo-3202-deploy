@@ -9,7 +9,7 @@ export default async function EventList(): Promise<JSX.Element> {
     <div className="container mx-auto px-4 py-8">
       <h2 className="text-2xl font-bold mb-4">Liste des Événements</h2>
       <div className="space-y-4">
-        {rows.map((event: any, index : any) => (
+        {rows.map((event, index) => (
           <div key={index} className="bg-white shadow overflow-hidden rounded-md px-6 py-4">
             <div className="pb-4">
               <h3 className="text-xl font-semibold">{event.Eventname}</h3>
