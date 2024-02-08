@@ -25,9 +25,12 @@ const CreateEventPage: React.FC = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('Event Created:', event);
+    
     // Here, you would integrate the logic to save the event
     // in your database or global state
+    if(event.name.trim.length > 0 && event.date.trim.length > 0 && event.description.trim.length > 0){
+        console.log('Event Created:', event);
+    }
   };
 
   return (
