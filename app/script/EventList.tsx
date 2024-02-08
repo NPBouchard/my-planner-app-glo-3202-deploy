@@ -3,8 +3,8 @@ import { sql } from "@vercel/postgres";
 export default async function EventList(): Promise<JSX.Element> {
     const userID = 1; 
 
-    const { rows } = await sql`SELECT * FROM events WHERE UserId = ${userID}`;
-
+    const { rows } = await sql`SELECT * FROM events WHERE Userid = ${userID}`;
+    console.log(rows);
   return (
     <div className="container mx-auto px-4 py-8">
       <h2 className="text-2xl font-bold mb-4">Liste des Événements</h2>
