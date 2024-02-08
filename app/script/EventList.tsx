@@ -12,13 +12,13 @@ export default async function EventList(): Promise<JSX.Element> {
         {rows.map((event, index) => (
           <div key={index} className="bg-white shadow overflow-hidden rounded-md px-6 py-4">
             <div className="pb-4">
-              <h3 className="text-xl font-semibold">{event.Eventname}</h3>
-              <p className="text-sm text-gray-500">Organisé par: UserID {event.Userid}</p>
-              <p className="text-sm text-gray-500">Date: {event.Eventdate}</p>
-              <p className="text-sm text-gray-500">Lieu: {event.Eventlocation}</p>
+              <h3 className="text-xl font-semibold">{event.eventname}</h3>
+              <p className="text-sm text-gray-500">Organisé par: UserID {event.userid}</p>
+              <p className="text-sm text-gray-500">Date: {event.eventdate}</p>
+              <p className="text-sm text-gray-500">Lieu: {event.eventlocation}</p>
             </div>
             <div>
-              <p className="text-gray-700">{event.Eventdescription}</p>
+              <p className="text-gray-700">{event.eventdescription}</p>
             </div>
           </div>
         ))}
