@@ -29,7 +29,7 @@ const CreateEventPage: React.FC = () => {
     
     // Here, you would integrate the logic to save the event
     // in your database or global state
-    console.log(e)
+    console.log('Event Created:', event);
   };
 
   const validateName = (name : string) => {
