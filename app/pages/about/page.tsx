@@ -14,9 +14,8 @@ const AboutPage: React.FC = () => {
                 <p className="text-lg text-center mt-4">
                     Notre mission est de fournir une plateforme intuitive et conviviale qui simplifie la gestion d'événements, que ce soit pour des réunions familiales, des conférences professionnelles, ou des rassemblements sociaux.
                 </p>
+                <PeopleList></PeopleList>
             </div>
-            <PeopleList></PeopleList>
-            <EventList></EventList>
         </Format>
     );
 };
