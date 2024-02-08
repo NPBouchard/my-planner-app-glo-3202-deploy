@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import Format from '@/app/components/Format';
+import { Are_You_Serious } from 'next/font/google';
 
 interface Event {
   name: string;
@@ -28,12 +29,20 @@ const CreateEventPage: React.FC = () => {
     
     // Here, you would integrate the logic to save the event
     // in your database or global state
-    if(event.name.trim.length > 0 && event.date.length > 0 && event.description.length > 0){
-        console.log('Event Created:', event);
-    }
+    console.log(e)
   };
 
-  
+  const validateName = (name : string) => {
+    return true;
+  };
+
+  const validateDate = (date : string) => {
+    return true;
+  }
+
+  const validateDescription = (desc : string) => {
+    return true
+  }
 
   return (
     <Format>
