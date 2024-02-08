@@ -2,6 +2,7 @@
 import Format from "./components/Format";
 import React, { useState } from "react";
 import Link from "next/link";
+import EventList from "./script/EventList";
 // Define the component with TypeScript
 const Page: React.FC = () => {
     const [activeTab, setActiveTab] = useState<string>('fonctionnalites');
@@ -66,7 +67,7 @@ const Page: React.FC = () => {
                 {activeTab === 'evenements' && (
                     <section className="mt-12">
                         <h2 className="text-3xl font-bold text-center mb-4">Événements Créés</h2>
-                        {/* Here, you could display a list or grid of events that the user has created. */}
+                        <EventList />
                     </section>
                 )}
             </div>
