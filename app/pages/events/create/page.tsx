@@ -7,8 +7,7 @@ const CreateEventPage: React.FC = () => {
 
   return (
     <Format> 
-        {/* <CreateEventForm></CreateEventForm> */}
-        hehe
+        <CreateEventForm></CreateEventForm>
     </Format>
   );
 };
