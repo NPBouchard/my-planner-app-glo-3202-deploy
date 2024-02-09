@@ -1,4 +1,3 @@
-import { NextApiRequest, NextApiResponse } from 'next';
 import { sql } from '@vercel/postgres';
 
 type RequestBody = {
@@ -8,9 +7,20 @@ type RequestBody = {
 
 type QueryResponse = any;
 
+type MyApiRequest = {
+  method?: string;
+  body: RequestBody;
+};
+
+type MyApiResponse = {
+  status: (statusCode: number) => MyApiResponse;
+  json: (body: QueryResponse | { message: string }) => void;
+  setHeader: (field: string, value: string[]) => void;
+};
+
 export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<QueryResponse | { message: string }>
+  req: MyApiRequest,
+  res: MyApiResponse
 ) {
   const { query, parameters }: RequestBody = req.body;
 
@@ -47,6 +57,6 @@ export default async function handler(
 
 async function executeQuery(query: string, parameters: any[]): Promise<QueryResponse> {
   // Your database query execution logic here
-  // This is a placeholder for your actual database interaction code
+  // Placeholder for actual database interaction code
   return {}; // Placeholder return
 }
