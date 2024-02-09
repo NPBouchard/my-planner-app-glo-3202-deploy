@@ -2,7 +2,7 @@
 import {NextRequest, NextResponse} from "next/server";
 
 export async function GET (request: NextRequest){
-    const greeting = "Hello World!!"
+    const greeting = "In events with user"
     const json = {
         greeting
     };
