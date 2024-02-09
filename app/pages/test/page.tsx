@@ -30,6 +30,24 @@ export default function Home() {
     setAge('')
   }
 
+  const loadTest = async () => {
+    try {
+        const res = await fetch('https://my-planner-app-glo-3202-deploy.vercel.app/api/handleform', {
+          method: 'GET',
+          headers: {
+            'content-type': 'application/json'
+          }
+        })
+        console.log(res)
+        if(res.ok){
+          console.log("Yeai!")
+        }else{
+          console.log("Oops! Something is wrong.")
+        }
+      } catch (error) {
+          console.log(error)
+      }
+  }
   
 
   return (
@@ -59,6 +77,7 @@ export default function Home() {
           >Submit</button>
         </div>
       </form>
+      <button onClick={() => loadTest}></button>
     </div>
   )
 }

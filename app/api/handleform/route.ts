@@ -1,14 +1,14 @@
 import { NextResponse } from "next/server";
 import { sql } from "@vercel/postgres";
 
-export async function GET(){
-    const data = {
-        name: 'Bishal Shrestha',
-        age: '27'
-    }
+// export async function GET(){
+//     const data = {
+//         name: 'Bishal Shrestha',
+//         age: '27'
+//     }
 
-    return NextResponse.json({data})
-}
+//     return NextResponse.json({data})
+// }
 
 // export async function POST(req,res){
 //     const data  = await req.json()
@@ -34,4 +34,10 @@ export async function POST(req : any, res : any){
         console.error('Error inserting data:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
+}
+
+
+export async function GET(){
+    const res = sql`SELECT * FROM people`;
+    return NextResponse.json({res})
 }
