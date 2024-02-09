@@ -10,6 +10,13 @@ export async function GET(){
     return NextResponse.json({data})
 }
 
+// export async function POST(req,res){
+//     const data  = await req.json()
+//     console.log(data)
+
+//     return NextResponse.json(data)
+// }
+
 export async function POST(req : any, res : any){
     const { name, age } = await req.json();
     
@@ -19,7 +26,7 @@ export async function POST(req : any, res : any){
     try {
         // Assuming your sql function is setup to handle SQL queries.
         // The query string is passed to the sql function along with parameters to prevent SQL injection.
-        await sql`INSERT INTO people (firstname, lastname) VALUES (${firstName}, ${lastName})`;
+        await sql`INSERT INTO people (firstname, lastname) VALUES ('${firstName}', '${lastName}')`;
 
         console.log('Data inserted successfully.');
         res.status(200).json({ message: 'Data inserted successfully.' });
