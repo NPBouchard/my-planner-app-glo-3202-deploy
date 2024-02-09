@@ -40,7 +40,6 @@ export default async function EventList(): Promise<JSX.Element> {
         </div>
       </div>
     ))} */}
-    {events}
   </div>
 </div>
   );
