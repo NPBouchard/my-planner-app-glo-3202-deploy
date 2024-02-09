@@ -1,21 +1,6 @@
 export default async function EventList(): Promise<JSX.Element> {
     const userID = 1; 
 
-    fetch(`https://my-planner-app-glo-3202-deploy.vercel.app/api/events/${userID}`, { 
-        method: 'GET' 
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log(data);
-    })
-      .catch(error => console.error('Error:', error));
-    
-
   return (
     <div className="container mx-auto px-4 py-8">
   <h2 className="text-2xl font-bold mb-4">Liste des Événements</h2>
@@ -34,6 +19,7 @@ export default async function EventList(): Promise<JSX.Element> {
       </div>
     ))} */}
   </div>
+  
 </div>
   );
 }
