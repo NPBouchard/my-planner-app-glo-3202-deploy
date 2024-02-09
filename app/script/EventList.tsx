@@ -4,6 +4,18 @@ export default async function EventList(): Promise<JSX.Element> {
     const userID = 1; 
 
     const { rows } = await sql`SELECT * FROM events WHERE Userid = ${userID}`;
+
+    fetch(`api/events/${userID}`, { 
+        method: 'GET' 
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => console.log(data))
+      .catch(error => console.error('Error:', error));
     
 
   return (
