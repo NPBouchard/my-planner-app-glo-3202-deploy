@@ -1,7 +1,6 @@
 'use client'
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import Format from '@/app/components/Format';
-import { Are_You_Serious } from 'next/font/google';
 
 interface Event {
   name: string;
@@ -29,7 +28,7 @@ const CreateEventPage: React.FC = () => {
     
     // Here, you would integrate the logic to save the event
     // in your database or global state
-    console.log('Event Created:', event);
+    console.log('Event Created:', event.name);
   };
 
   const validateName = (name : string) => {
@@ -42,6 +41,22 @@ const CreateEventPage: React.FC = () => {
 
   const validateDescription = (desc : string) => {
     return true
+  }
+
+  async function sendQuery(query: string, parameters: any[]): Promise<any> {
+    const response = await fetch('/api/query', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ query, parameters }),
+      });
+    
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+    
+      return response.json();
   }
 
   return (
