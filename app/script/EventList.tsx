@@ -5,7 +5,7 @@ export default async function EventList(): Promise<JSX.Element> {
 
     const { rows } = await sql`SELECT * FROM events WHERE Userid = ${userID}`;
 
-    fetch(`api/events/${userID}`, { 
+    fetch(`/api/events/${userID}`, { 
         method: 'GET' 
       })
       .then(response => {
