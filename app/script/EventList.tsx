@@ -5,7 +5,7 @@ export default async function EventList(): Promise<JSX.Element> {
 
     const { rows } = await sql`SELECT * FROM events WHERE Userid = ${userID}`;
 
-    fetch(`https://my-planner-app-glo-3202-deploy.vercel.app//api/events/${userID}`, { 
+    fetch(`https://my-planner-app-glo-3202-deploy.vercel.app/api/events/${userID}`, { 
         method: 'GET' 
       })
       .then(response => {
