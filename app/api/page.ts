@@ -1,5 +1,4 @@
-// pages/api/query.ts
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiRequest, NextApiResponse } from 'next';
 import { sql } from '@vercel/postgres';
 
 type RequestBody = {
