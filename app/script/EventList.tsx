@@ -1,11 +1,5 @@
-'use client'
-import React, {useState} from "react";
-
 export default async function EventList(): Promise<JSX.Element> {
-    const [events, setEvents] = useState([])
     const userID = 1; 
-
-    
 
     fetch(`https://my-planner-app-glo-3202-deploy.vercel.app/api/events/${userID}`, { 
         method: 'GET' 
@@ -18,7 +12,6 @@ export default async function EventList(): Promise<JSX.Element> {
       })
       .then(data => {
         console.log(data);
-        setEvents(data);
     })
       .catch(error => console.error('Error:', error));
     
