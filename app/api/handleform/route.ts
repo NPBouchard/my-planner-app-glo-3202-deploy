@@ -26,7 +26,7 @@ export async function POST(req : any, res : any){
     try {
         // Assuming your sql function is setup to handle SQL queries.
         // The query string is passed to the sql function along with parameters to prevent SQL injection.
-        await sql`INSERT INTO people (firstname, lastname) VALUES ('${firstName}', '${lastName}')`;
+        await sql`INSERT INTO people (firstname, lastname) VALUES ($1, $2)`, [firstName, lastName];
 
         console.log('Data inserted successfully.');
         res.status(200).json({ message: 'Data inserted successfully.' });
