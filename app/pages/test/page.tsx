@@ -77,7 +77,7 @@ export default function Home() {
           >Submit</button>
         </div>
       </form>
-      <button onClick={() => loadTest}></button>
+      <button onClick={() => loadTest}>button</button>
     </div>
   )
 }
