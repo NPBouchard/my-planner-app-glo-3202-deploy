@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import Format from '@/app/components/Format';
 
@@ -6,13 +6,16 @@ interface Event {
   name: string;
   date: string;
   description: string;
+  location: string; 
 }
 
 const CreateEventPage: React.FC = () => {
+    const userID = 1;
   const [event, setEvent] = useState<Event>({
     name: '',
     date: '',
     description: '',
+    location: '',
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -26,37 +29,26 @@ const CreateEventPage: React.FC = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     
+    sendQuery();
     // Here, you would integrate the logic to save the event
     // in your database or global state
     console.log('Event Created:', event.name);
   };
 
-  const validateName = (name : string) => {
-    return true;
-  };
-
-  const validateDate = (date : string) => {
-    return true;
-  }
-
-  const validateDescription = (desc : string) => {
-    return true
-  }
-
-  async function sendQuery(query: string, parameters: any[]): Promise<any> {
-    const response = await fetch('/api/query', {
+  async function sendQuery(){
+        await fetch(`https://my-planner-app-glo-3202-deploy.vercel.app/api/events/${userID}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ query, parameters }),
-      });
-    
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-    
-      return response.json();
+        body: JSON.stringify(event),
+      })
+      .then(res => res.json())
+      .then(data => {console.log(data);})
+      .catch(error => {
+        console.error("Error posting events: ", error);
+      })
+
   }
 
   return (

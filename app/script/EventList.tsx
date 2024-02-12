@@ -1,5 +1,4 @@
 "use client"
-import { eventNames } from "process";
 import React, {useState, useEffect} from "react";
 
 export default function EventList(){
@@ -17,7 +16,7 @@ export default function EventList(){
     
 
       const loadEvents = async () => {
-            const res = await fetch(`https://my-planner-app-glo-3202-deploy.vercel.app/api/events/${userID}`, {
+            await fetch(`https://my-planner-app-glo-3202-deploy.vercel.app/api/events/${userID}`, {
               method: 'GET',
               headers: {
                 'content-type': 'application/json'
