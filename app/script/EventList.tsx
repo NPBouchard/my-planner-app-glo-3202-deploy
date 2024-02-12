@@ -12,9 +12,9 @@ export default async function EventList(){
 
     
 
-      const loadEvents = async () => {
+      const loadEvents = () => {
         
-            const res = await fetch(`https://my-planner-app-glo-3202-deploy.vercel.app/api/events/${userID}`, {
+            const res = fetch(`https://my-planner-app-glo-3202-deploy.vercel.app/api/events/${userID}`, {
               method: 'GET',
               headers: {
                 'content-type': 'application/json'
