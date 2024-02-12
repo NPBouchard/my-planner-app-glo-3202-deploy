@@ -3,8 +3,7 @@ import React, {useState, useEffect} from "react";
 
 export default function EventList(){
     const userID = 1; 
-    const [events, setEvents] = useState<[] | null>(null)
-
+    const [events, setEvents] = useState([])
     useEffect(() => {
         // Call loadEvents when the component mounts
         loadEvents();
@@ -33,7 +32,7 @@ export default function EventList(){
   return (
     <div className="container mx-auto px-4 py-8">
   <h2 className="text-2xl font-bold mb-4">Liste des Événements</h2>
-  {Array.isArray(events) && <div className="grid grid-cols-5 gap-4">
+  <div className="grid grid-cols-5 gap-4">
     {events.map((event: any, index: any) => (
       <div key={index} className="bg-white shadow overflow-hidden rounded-md px-6 py-4 col-span-1">
         <div className="pb-4">
