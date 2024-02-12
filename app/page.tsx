@@ -1,3 +1,4 @@
+"use client"
 import Format from "./components/Format";
 import React from "react";
 import Link from "next/link";
