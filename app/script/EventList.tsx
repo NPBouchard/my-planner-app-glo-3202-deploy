@@ -5,10 +5,10 @@ export default async function EventList(): Promise<JSX.Element> {
     const userID = 1; 
     const [events, setEvents] = useState(null)
 
-    useEffect(() => {
-        // Call loadEvents when the component mounts
-        loadEvents();
-      }, []);
+    // useEffect(() => {
+    //     // Call loadEvents when the component mounts
+    //     loadEvents();
+    //   }, []);
 
     const loadEvents = async () => {
         try {
