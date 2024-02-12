@@ -3,7 +3,7 @@ import React, {useState, useEffect} from "react";
 
 export default function EventList(){
     const userID = 1; 
-    const [events, setEvents] = useState(null)
+    const [events, setEvents] = useState<[] | null>(null)
 
     useEffect(() => {
         // Call loadEvents when the component mounts
