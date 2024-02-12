@@ -25,8 +25,8 @@ export default function EventList(){
             })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
-                setEvents(data);
+                console.log(data.rows);
+                setEvents(data.rows);
             })
             .catch(error => {
                 console.error("Error fetching events: ", error);
