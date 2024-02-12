@@ -51,7 +51,7 @@ export default async function EventList(){
 
   return (
     <div className="container mx-auto px-4 py-8">
-        <button onClick={loadEvents}>Click</button>
+        {/* <button onClick={loadEvents}>Click</button> */}
   <h2 className="text-2xl font-bold mb-4">Liste des Événements</h2>
   <div className="grid grid-cols-5 gap-4">
     {/* {rows.map((event: any, index: any) => (
