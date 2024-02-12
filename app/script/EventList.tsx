@@ -5,33 +5,14 @@ export default async function EventList(){
     const userID = 1; 
     const [events, setEvents] = useState(null)
 
-    // useEffect(() => {
-    //     // Call loadEvents when the component mounts
-    //     loadEvents();
-    //   }, []);
+    useEffect(() => {
+        // Call loadEvents when the component mounts
+        loadEvents();
+      }, []);
 
-    const loadEvents = async () => {
-        try {
-            const res = await fetch(`https://my-planner-app-glo-3202-deploy.vercel.app/api/events/${userID}`, {
-              method: 'GET',
-              headers: {
-                'content-type': 'application/json'
-              }
-            })
-            console.log(res)
-            if(res.ok){
-                const data = await res.json();
-                setEvents(data);
-                console.log("Yeai!", data)
-            }else{
-              console.log("Oops! Something is wrong.")
-            }
-          } catch (error) {
-              console.log(error)
-          }
-      }
+    
 
-      const loadEventsV2 = async () => {
+      const loadEvents = async () => {
         
             const res = await fetch(`https://my-planner-app-glo-3202-deploy.vercel.app/api/events/${userID}`, {
               method: 'GET',
@@ -42,6 +23,7 @@ export default async function EventList(){
             .then(res => res.json())
             .then(data => {
                 console.log(data);
+                setEvents(data);
             })
             .catch(error => {
                 console.error("Error fetching events: ", error);
