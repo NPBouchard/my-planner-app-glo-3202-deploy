@@ -1,4 +1,5 @@
 "use client"
+import { eventNames } from "process";
 import React, {useState, useEffect} from "react";
 
 export default function EventList(){
@@ -8,6 +9,10 @@ export default function EventList(){
         // Call loadEvents when the component mounts
         loadEvents();
       }, []);
+
+    useEffect(() => {
+        console.log("Events Updated:", events);
+    }, [events]);
 
     
 
