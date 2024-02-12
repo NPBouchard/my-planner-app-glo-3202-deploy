@@ -1,7 +1,7 @@
 "use client"
 import React, {useState, useEffect} from "react";
 
-export default async function EventList(){
+export default function EventList(){
     const userID = 1; 
     const [events, setEvents] = useState(null)
 
@@ -12,9 +12,9 @@ export default async function EventList(){
 
     
 
-      const loadEvents = () => {
+      const loadEvents = async () => {
         
-            const res = fetch(`https://my-planner-app-glo-3202-deploy.vercel.app/api/events/${userID}`, {
+            const res = await fetch(`https://my-planner-app-glo-3202-deploy.vercel.app/api/events/${userID}`, {
               method: 'GET',
               headers: {
                 'content-type': 'application/json'
@@ -49,7 +49,6 @@ export default async function EventList(){
       </div>
     ))} */}
   </div>
-  
 </div>
   );
 }
