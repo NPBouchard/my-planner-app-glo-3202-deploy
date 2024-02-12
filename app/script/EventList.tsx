@@ -1,7 +1,7 @@
 "use client"
 import React, {useState, useEffect} from "react";
 
-export default async function EventList(): Promise<JSX.Element> {
+export default async function EventList(){
     const userID = 1; 
     const [events, setEvents] = useState(null)
 
