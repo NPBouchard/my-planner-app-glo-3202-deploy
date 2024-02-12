@@ -3,55 +3,55 @@ import React, {useState, useEffect} from "react";
 
 export default async function EventList(){
     const userID = 1; 
-    // const [events, setEvents] = useState(null)
+    const [events, setEvents] = useState(null)
 
-    // // useEffect(() => {
-    // //     // Call loadEvents when the component mounts
-    // //     loadEvents();
-    // //   }, []);
+    // useEffect(() => {
+    //     // Call loadEvents when the component mounts
+    //     loadEvents();
+    //   }, []);
 
-    // const loadEvents = async () => {
-    //     try {
-    //         const res = await fetch(`https://my-planner-app-glo-3202-deploy.vercel.app/api/events/${userID}`, {
-    //           method: 'GET',
-    //           headers: {
-    //             'content-type': 'application/json'
-    //           }
-    //         })
-    //         console.log(res)
-    //         if(res.ok){
-    //             const data = await res.json();
-    //             setEvents(data);
-    //             console.log("Yeai!", data)
-    //         }else{
-    //           console.log("Oops! Something is wrong.")
-    //         }
-    //       } catch (error) {
-    //           console.log(error)
-    //       }
-    //   }
-    
-
-    const [data, setData] = useState(null);
-
-  useEffect(() => {
-    // Define an async function inside the effect
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`https://my-planner-app-glo-3202-deploy.vercel.app/api/events/${userID}`);
-        const result = await response.json();
-        setData(result);
-      } catch (error) {
-        console.error('Failed to fetch data:', error);
+    const loadEvents = async () => {
+        try {
+            const res = await fetch(`https://my-planner-app-glo-3202-deploy.vercel.app/api/events/${userID}`, {
+              method: 'GET',
+              headers: {
+                'content-type': 'application/json'
+              }
+            })
+            console.log(res)
+            if(res.ok){
+                const data = await res.json();
+                setEvents(data);
+                console.log("Yeai!", data)
+            }else{
+              console.log("Oops! Something is wrong.")
+            }
+          } catch (error) {
+              console.log(error)
+          }
       }
-    };
-    // Call the async function
-    fetchData();
-  }, []);
+
+      const loadEventsV2 = async () => {
+        
+            const res = await fetch(`https://my-planner-app-glo-3202-deploy.vercel.app/api/events/${userID}`, {
+              method: 'GET',
+              headers: {
+                'content-type': 'application/json'
+              }
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.error("Error fetching events: ", error);
+            })
+        }
+ 
 
   return (
     <div className="container mx-auto px-4 py-8">
-        {/* <button onClick={loadEvents}>Click</button> */}
+        <button onClick={loadEventsV2}>Click</button>
   <h2 className="text-2xl font-bold mb-4">Liste des Événements</h2>
   <div className="grid grid-cols-5 gap-4">
     {/* {rows.map((event: any, index: any) => (
