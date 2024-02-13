@@ -26,13 +26,23 @@ const CreateEventPage: React.FC = () => {
     }));
   };
 
+  const validateEvent = (event: Event): boolean => {
+    if (!event.name || !event.date || !event.description || !event.location) {
+      alert("All fields are required and must be filled out.");
+      return false;
+    }
+    // Additional validation checks can be added here (e.g., date format, future dates, etc.)
+    return true;
+  };
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    sendQuery();
-    // Here, you would integrate the logic to save the event
-    // in your database or global state
-    console.log('Event Created:', event.name);
+    if(validateEvent(event)){
+      sendQuery();
+      console.log('Event Created:', event.name);
+    }
+    
   };
 
   async function sendQuery(){
