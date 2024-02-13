@@ -3,6 +3,7 @@ import React, { useState, ChangeEvent, FormEvent } from 'react';
 import Format from '@/app/components/Format';
 import Cookies from 'js-cookie';
 import { MapPinIcon } from '@heroicons/react/16/solid';
+import { Space_Mono } from 'next/font/google';
 
 interface Event {
   name: string;
@@ -75,9 +76,10 @@ const CreateEventPage: React.FC = () => {
   return (
     <Format>
       <div className="max-w-4xl mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-center mb-6">Créer un Nouvel Événement <MapPinIcon className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={UseActualLocation}>
+        <span>
+        <h1 className="text-3xl font-bold text-center mb-6">Créer un Nouvel Événement </h1><MapPinIcon className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded" onClick={UseActualLocation}>
                 Location Actuelle
-              </MapPinIcon></h1>
+              </MapPinIcon></span>
         <form onSubmit={handleSubmit} className="w-full max-w-lg mx-auto">
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full px-3">
