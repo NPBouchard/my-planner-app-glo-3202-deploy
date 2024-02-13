@@ -3,6 +3,7 @@ import Format from "./components/Format";
 import React, {useEffect}from "react";
 import Link from "next/link";
 import EventList from "./script/EventList";
+import Cookies from "js-cookie";
 
 function getLocation(): Promise<GeolocationPosition> {
     return new Promise((resolve, reject) => {
@@ -20,7 +21,8 @@ function getLocation(): Promise<GeolocationPosition> {
       const consent = confirm("Souhaitez-vous que nous enregistrions votre localisation pour améliorer votre expérience ?");
       if (consent) {
         const { latitude, longitude } = position.coords;
-        console.log(position.coords)
+        Cookies.set('location', JSON.stringify({ latitude, longitude }), { expires: 7 });
+        console.log("Location saved in cookie: ", position.coords)
       }
     } catch (error) {
       console.error("Erreur lors de la récupération de la localisation:", error);
@@ -28,9 +30,12 @@ function getLocation(): Promise<GeolocationPosition> {
   }
 
 const Page: React.FC = () => {
+    const localisation = Cookies.get("location");
 
     useEffect(() => {
-        askForLocationConsent();
+        if(!localisation){
+            askForLocationConsent();
+        }
     }, []);
 
     return (
