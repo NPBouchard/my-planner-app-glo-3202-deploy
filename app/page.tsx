@@ -1,11 +1,38 @@
 "use client"
 import Format from "./components/Format";
-import React from "react";
+import React, {useEffect}from "react";
 import Link from "next/link";
 import EventList from "./script/EventList";
 
+function getLocation(): Promise<GeolocationPosition> {
+    return new Promise((resolve, reject) => {
+      if (!navigator.geolocation) {
+        reject(new Error("La géolocalisation n'est pas supportée par ce navigateur."));
+      } else {
+        navigator.geolocation.getCurrentPosition(resolve, reject);
+      }
+    });
+  }
+
+  async function askForLocationConsent(): Promise<void> {
+    try {
+      const position = await getLocation();
+      const consent = confirm("Souhaitez-vous que nous enregistrions votre localisation pour améliorer votre expérience ?");
+      if (consent) {
+        const { latitude, longitude } = position.coords;
+        console.log(position.coords)
+      }
+    } catch (error) {
+      console.error("Erreur lors de la récupération de la localisation:", error);
+    }
+  }
 
 const Page: React.FC = () => {
+
+    useEffect(() => {
+        askForLocationConsent();
+    }, []);
+
     return (
         <Format>
             <div className="max-w-6xl mx-auto px-4 py-8">
