@@ -2,6 +2,7 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import Format from '@/app/components/Format';
 import Cookies from 'js-cookie';
+import { MapPinIcon } from '@heroicons/react/16/solid';
 
 interface Event {
   name: string;
@@ -64,7 +65,7 @@ const CreateEventPage: React.FC = () => {
 
   const UseActualLocation = () => {
     const localisation = Cookies.get("location") || '';
-    
+
     setEvent(prevEvent => ({
       ...prevEvent,
       location: localisation,
@@ -74,9 +75,9 @@ const CreateEventPage: React.FC = () => {
   return (
     <Format>
       <div className="max-w-4xl mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-center mb-6">Créer un Nouvel Événement <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={UseActualLocation}>
+        <h1 className="text-3xl font-bold text-center mb-6">Créer un Nouvel Événement <MapPinIcon className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={UseActualLocation}>
                 Location Actuelle
-              </button></h1>
+              </MapPinIcon></h1>
         <form onSubmit={handleSubmit} className="w-full max-w-lg mx-auto">
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full px-3">
