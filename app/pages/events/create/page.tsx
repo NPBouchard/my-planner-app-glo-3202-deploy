@@ -76,10 +76,10 @@ const CreateEventPage: React.FC = () => {
   return (
     <Format>
       <div className="max-w-4xl mx-auto px-4 py-8">
-        <span>
-        <h1 className="text-3xl font-bold text-center mb-6">Créer un Nouvel Événement </h1><MapPinIcon className="bg-blue-500 hover:bg-blue-700 text-white rounded" onClick={UseActualLocation}>
+        <h1 className="text-3xl font-bold text-center mb-6">Créer un Nouvel Événement <MapPinIcon className="w-6 h-6 bg-blue-500 hover:bg-blue-700 text-white rounded" onClick={UseActualLocation}>
                 Location Actuelle
-              </MapPinIcon></span>
+              </MapPinIcon></h1>
+        
         <form onSubmit={handleSubmit} className="w-full max-w-lg mx-auto">
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full px-3">
