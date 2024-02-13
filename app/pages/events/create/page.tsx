@@ -77,7 +77,7 @@ const CreateEventPage: React.FC = () => {
     <Format>
       <div className="max-w-4xl mx-auto px-4 py-8">
         <span>
-        <h1 className="text-3xl font-bold text-center mb-6">Créer un Nouvel Événement </h1><MapPinIcon className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded" onClick={UseActualLocation}>
+        <h1 className="text-3xl font-bold text-center mb-6">Créer un Nouvel Événement </h1><MapPinIcon className="bg-blue-500 hover:bg-blue-700 text-white rounded" onClick={UseActualLocation}>
                 Location Actuelle
               </MapPinIcon></span>
         <form onSubmit={handleSubmit} className="w-full max-w-lg mx-auto">
