@@ -1,6 +1,7 @@
 "use client"
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import Format from '@/app/components/Format';
+import Cookies from 'js-cookie';
 
 interface Event {
   name: string;
@@ -61,6 +62,15 @@ const CreateEventPage: React.FC = () => {
 
   }
 
+  const UseActualLocation = () => {
+    const localisation = Cookies.get("location") || '';
+    
+    setEvent(prevEvent => ({
+      ...prevEvent,
+      location: localisation,
+    }));
+  }
+
   return (
     <Format>
       <div className="max-w-4xl mx-auto px-4 py-8">
@@ -85,7 +95,9 @@ const CreateEventPage: React.FC = () => {
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full px-3">
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="location">
-                Location
+                Location <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={UseActualLocation}>
+                Location Actuelle
+              </button>
               </label>
               <input className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="location" type="text" placeholder="Location de votre événement" name="location" value={event.location} onChange={handleChange} />
             </div>
@@ -103,9 +115,7 @@ const CreateEventPage: React.FC = () => {
               <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
                 Créer Événement
               </button>
-              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Location Actuelle
-              </button>
+              
             </div>
           </div>
         </form>
