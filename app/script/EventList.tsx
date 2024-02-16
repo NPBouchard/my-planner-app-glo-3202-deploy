@@ -1,12 +1,25 @@
 "use client"
 import React, {useState, useEffect} from "react";
+import { loadFromLocalStorage } from "./AccessToLocalStorage";
+
+interface User {
+  id: string;
+  username: string;
+}
 
 export default function EventList(){
-    const userID = 1; 
+     
     const [events, setEvents] = useState([])
+    const [user, setUser] = useState<User | null>(null);
     useEffect(() => {
         // Call loadEvents when the component mounts
         loadEvents();
+
+        const storedUser: User | null = loadFromLocalStorage<User>('selectedUser');
+        if(storedUser){
+          setUser(storedUser);
+        }
+
       }, []);
 
     useEffect(() => {
@@ -16,7 +29,7 @@ export default function EventList(){
     
 
       const loadEvents = async () => {
-            await fetch(`https://my-planner-app-glo-3202-deploy.vercel.app/api/events/${userID}`, {
+            await fetch(`https://my-planner-app-glo-3202-deploy.vercel.app/api/events/${user?.id}`, {
               method: 'GET',
               headers: {
                 'content-type': 'application/json'

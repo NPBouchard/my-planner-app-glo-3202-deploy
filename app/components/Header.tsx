@@ -14,7 +14,6 @@ const Header: React.FC = () => {
 	const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
 	useEffect(() => {
-		// Call loadEvents when the component mounts
 		loadUsers();
 
 		const storedUser: User | null = loadFromLocalStorage<User>('selectedUser');
