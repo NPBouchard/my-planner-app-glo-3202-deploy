@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
+import { saveToLocalStorage, loadFromLocalStorage } from '../script/AccessToLocalStorage';
 
 interface User {
 	id: string;
@@ -48,26 +49,6 @@ const Header: React.FC = () => {
 		setSelectedUser(user);
 		saveToLocalStorage('selectedUser', user);
 	};
-
-	function saveToLocalStorage<T>(key: string, data: T): void {
-		try {
-			const jsonData = JSON.stringify(data);
-			localStorage.setItem(key, jsonData);
-		} catch (error) {
-			console.error('Error saving to localStorage', error);
-		}
-	}
-
-	function loadFromLocalStorage<T>(key: string): T | null {
-		try {
-			const jsonData = localStorage.getItem(key);
-			return jsonData ? (JSON.parse(jsonData) as T) : null;
-		} catch (error) {
-			console.error('Error loading from localStorage', error);
-			return null;
-		}
-	}
-
 	return (
 		<header className="bg-blue-500 text-white body-font shadow w-full">
 			<div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
