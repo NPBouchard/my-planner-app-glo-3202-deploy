@@ -25,6 +25,7 @@ const Header: React.FC = () => {
 
 	useEffect(() => {
 		setIsDropdownOpen(false);
+		window.location.reload()
 	}, [selectedUser]);
 
 	const loadUsers = async () => {
