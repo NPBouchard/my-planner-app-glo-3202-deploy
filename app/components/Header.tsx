@@ -1,7 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { connected } from 'process';
-import React, { useState, useEffect, use } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface User {
 	id: string;
@@ -17,10 +16,10 @@ const Header: React.FC = () => {
 		// Call loadEvents when the component mounts
 		loadUsers();
 
-		const storedUser = localStorage.getItem('selectedUser');
+		const storedUser: User | null = loadFromLocalStorage<User>('selectedUser');
 
 		if (storedUser) {
-			setSelectedUser(JSON.parse(storedUser));
+			setSelectedUser(storedUser);
 		}
 	}, []);
 
@@ -43,8 +42,27 @@ const Header: React.FC = () => {
 
 	const handleSelectUser = (user: User) => {
 		setSelectedUser(user);
-		localStorage.setItem('selectedUser', JSON.stringify(user));
+		saveToLocalStorage('selectedUser', user);
 	};
+
+	function saveToLocalStorage<T>(key: string, data: T): void {
+		try {
+			const jsonData = JSON.stringify(data);
+			localStorage.setItem(key, jsonData);
+		} catch (error) {
+			console.error('Error saving to localStorage', error);
+		}
+	}
+
+	function loadFromLocalStorage<T>(key: string): T | null {
+		try {
+			const jsonData = localStorage.getItem(key);
+			return jsonData ? (JSON.parse(jsonData) as T) : null;
+		} catch (error) {
+			console.error('Error loading from localStorage', error);
+			return null;
+		}
+	}
 
 	return (
 		<header className="bg-blue-500 text-white body-font shadow w-full">
@@ -95,9 +113,7 @@ const Header: React.FC = () => {
 							onClick={() => setIsDropdownOpen(!isDropdownOpen)}
 							className="mr-5 hover:text-gray-900 focus:outline-none"
 						>
-							{localStorage.getItem('selectedUser')
-								? localStorage.getItem('selectedUser')
-								: 'Active User'}
+							{selectedUser ? selectedUser.username : 'Connect'}
 						</button>
 						{isDropdownOpen && (
 							<div className="absolute left-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
