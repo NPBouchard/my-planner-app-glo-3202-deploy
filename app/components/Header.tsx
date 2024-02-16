@@ -1,19 +1,27 @@
 'use client';
 import Link from 'next/link';
+import { connected } from 'process';
 import React, { useState, useEffect, use } from 'react';
 
 interface User {
-  id: string;
-  username: string;
-};
+	id: string;
+	username: string;
+}
 
 const Header: React.FC = () => {
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [users, setUsers] = useState([]);
+	const [users, setUsers] = useState<User[]>([]);
+	const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
 	useEffect(() => {
 		// Call loadEvents when the component mounts
 		loadUsers();
+
+		const storedUser = localStorage.getItem('selectedUser');
+
+		if (storedUser) {
+			setSelectedUser(JSON.parse(storedUser));
+		}
 	}, []);
 
 	const loadUsers = async () => {
@@ -26,14 +34,17 @@ const Header: React.FC = () => {
 			.then((res) => res.json())
 			.then((data) => {
 				console.log(data.rows);
-        setUsers(data.rows);
+				setUsers(data.rows);
 			})
 			.catch((error) => {
 				console.error('Error fetching events: ', error);
 			});
 	};
 
-
+	const handleSelectUser = (user: User) => {
+		setSelectedUser(user);
+		localStorage.setItem('selectedUser', JSON.stringify(user));
+	};
 
 	return (
 		<header className="bg-blue-500 text-white body-font shadow w-full">
@@ -84,20 +95,23 @@ const Header: React.FC = () => {
 							onClick={() => setIsDropdownOpen(!isDropdownOpen)}
 							className="mr-5 hover:text-gray-900 focus:outline-none"
 						>
-							ConnectedUser
+							{localStorage.getItem('selectedUser')
+								? localStorage.getItem('selectedUser')
+								: 'Active User'}
 						</button>
 						{isDropdownOpen && (
-            <div className="absolute left-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
-              {users.map((user : User, index) => (
-                <button
-                  key={index}
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                >
-                  {user.username}
-                </button>
-              ))}
-            </div>
-          )}
+							<div className="absolute left-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
+								{users.map((user: User, index) => (
+									<button
+										key={index}
+										onClick={() => handleSelectUser(user)}
+										className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+									>
+										{user.username}
+									</button>
+								))}
+							</div>
+						)}
 					</div>
 				</nav>
 			</div>
