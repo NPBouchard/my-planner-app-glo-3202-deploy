@@ -2,9 +2,14 @@
 import Link from 'next/link';
 import React, { useState, useEffect, use } from 'react';
 
+interface User {
+  id: string;
+  username: string;
+};
+
 const Header: React.FC = () => {
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [users, setUsers] = useState(false);
+  const [users, setUsers] = useState([]);
 
 	useEffect(() => {
 		// Call loadEvents when the component mounts
@@ -82,26 +87,17 @@ const Header: React.FC = () => {
 							ConnectedUser
 						</button>
 						{isDropdownOpen && (
-							<div className="absolute left-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
-								<Link
-									href="/pages/about/team"
-									legacyBehavior
-								>
-									<a className="block px-4 py-2 text-sm text-gray-800 hover:bg-blue-500 hover:text-white">
-										Our Team
-									</a>
-								</Link>
-								<Link
-									href="/pages/about/history"
-									legacyBehavior
-								>
-									<a className="block px-4 py-2 text-sm text-gray-800 hover:bg-blue-500 hover:text-white">
-										Our History
-									</a>
-								</Link>
-								{/* Add more dropdown links as needed */}
-							</div>
-						)}
+            <div className="absolute left-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
+              {users.map((user : User, index) => (
+                <button
+                  key={index}
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  {user.username}
+                </button>
+              ))}
+            </div>
+          )}
 					</div>
 				</nav>
 			</div>
