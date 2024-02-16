@@ -23,6 +23,10 @@ const Header: React.FC = () => {
 		}
 	}, []);
 
+	useEffect(() => {
+		setIsDropdownOpen(false);
+	}, [selectedUser]);
+
 	const loadUsers = async () => {
 		await fetch(`https://my-planner-app-glo-3202-deploy.vercel.app/api/users`, {
 			method: 'GET',
