@@ -13,19 +13,24 @@ export default function EventList(){
     const [user, setUser] = useState<User | null>(null);
     useEffect(() => {
         // Call loadEvents when the component mounts
-        loadEvents();
+        
 
         const storedUser: User | null = loadFromLocalStorage<User>('selectedUser');
         if(storedUser){
           setUser(storedUser);
         }
-
+        
+        
       }, []);
 
     useEffect(() => {
         console.log("Events Updated:", events);
     }, [events]);
 
+    useEffect(() => {
+      loadEvents();
+      console.log("User Updated:", user);
+  }, [user]);
     
 
       const loadEvents = async () => {
