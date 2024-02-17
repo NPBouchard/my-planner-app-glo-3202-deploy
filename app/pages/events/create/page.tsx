@@ -125,11 +125,11 @@ const CreateEventPage: React.FC = () => {
 		if (isOk) {
 			let favList: string[] | null = loadFromLocalStorage<string[]>('favList');
 			if (favList) {
-        if(favList.length <= 15){
-          favList.push(event.location);
-        } else {
-          alert("Maximum of 15 favorites, clear your cache to get new one.")
-        }
+				if (favList.length <= 15) {
+					favList.push(event.location);
+				} else {
+					alert('Maximum of 15 favorites, clear your cache to get new one.');
+				}
 			} else {
 				favList = [event.location];
 			}
@@ -149,7 +149,10 @@ const CreateEventPage: React.FC = () => {
 					>
 						Location Actuelle
 					</MapPinIcon>
-					<StarIcon className="w-6 h-6 bg-blue-500 hover:bg-blue-700 text-white rounded">
+					<StarIcon
+						className="w-6 h-6 bg-blue-500 hover:bg-blue-700 text-white rounded"
+						onClick={addLocationToFavorite}
+					>
 						Add to favorite
 					</StarIcon>
 				</h1>
@@ -247,21 +250,24 @@ const CreateEventPage: React.FC = () => {
 						</div>
 					</div>
 				</form>
-        {favList && (
-  <div className="mt-8">
-    <h2 className="text-xl font-bold mb-4">Favorite Locations</h2>
-    <ul>
-      {favList.map((location, index) => (
-        <li key={index} className="mb-2">
-          <div className="flex items-center">
-            <MapPinIcon className="w-5 h-5 mr-2 text-blue-500" />
-            <span>{location}</span>
-          </div>
-        </li>
-      ))}
-    </ul>
-  </div>
-)}
+				{favList && (
+					<div className="mt-8">
+						<h2 className="text-xl font-bold mb-4">Favorite Locations</h2>
+						<ul>
+							{favList.map((location, index) => (
+								<li
+									key={index}
+									className="mb-2"
+								>
+									<div className="flex items-center">
+										<MapPinIcon className="w-5 h-5 mr-2 text-blue-500" />
+										<span>{location}</span>
+									</div>
+								</li>
+							))}
+						</ul>
+					</div>
+				)}
 			</div>
 		</Format>
 	);
