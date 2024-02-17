@@ -3,6 +3,7 @@ import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import Format from '@/app/components/Format';
 import Cookies from 'js-cookie';
 import { MapPinIcon } from '@heroicons/react/16/solid';
+import {StarIcon} from '@heroicons/react/16/solid';
 import { loadFromLocalStorage } from '@/app/script/AccessToLocalStorage';
 
 interface Event {
@@ -105,13 +106,17 @@ const validateEvent = (event: Event): boolean => {
 		<Format>
 			<div className="max-w-4xl mx-auto px-4 py-8">
 				<h1 className="text-3xl font-bold text-center mb-6">
-					Créer un Nouvel Événement{' '}
+					Créer un Nouvel Événement
 					<MapPinIcon
 						className="w-6 h-6 bg-blue-500 hover:bg-blue-700 text-white rounded"
 						onClick={UseActualLocation}
 					>
 						Location Actuelle
 					</MapPinIcon>
+          <StarIcon
+          className="w-6 h-6 bg-blue-500 hover:bg-blue-700 text-white rounded">
+            Add to favorite
+          </StarIcon>
 				</h1>
 
 				<form
