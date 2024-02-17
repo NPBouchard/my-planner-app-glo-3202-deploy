@@ -35,24 +35,33 @@ const CreateEventPage: React.FC = () => {
 		}
 	}, []);
 
-	const handleChange = (
-		e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-	) => {
-		const { name, value } = e.target;
-		setEvent((prevState) => ({
-			...prevState,
-			[name]: value,
-		}));
-	};
 
-	const validateEvent = (event: Event): boolean => {
-		if (!event.name || !event.date || !event.description || !event.location) {
-			alert('All fields are required and must be filled out.');
-			return false;
-		}
-		// Additional validation checks can be added here (e.g., date format, future dates, etc.)
-		return true;
-	};
+const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+) => {
+    const { name, value } = e.target;
+    setEvent((prevState) => ({
+        ...prevState,
+        [name]: value.slice(0, name === 'description' ? 256 : 32), // Enforcing limits directly in the handler as an additional measure
+    }));
+};
+
+const validateEvent = (event: Event): boolean => {
+    if (!event.name || !event.date || !event.description || !event.location) {
+        alert('All fields are required and must be filled out.');
+        return false;
+    }
+    if (event.name.length > 32 || event.location.length > 32) {
+        alert('The name and location must not exceed 32 characters.');
+        return false;
+    }
+    if (event.description.length > 256) {
+        alert('The description must not exceed 256 characters.');
+        return false;
+    }
+    // Additional validation checks can be added here
+    return true;
+};
 
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -123,6 +132,7 @@ const CreateEventPage: React.FC = () => {
 								type="text"
 								placeholder="Nom de votre événement"
 								name="name"
+                maxLength={32}
 								value={event.name}
 								onChange={handleChange}
 							/>
@@ -161,6 +171,7 @@ const CreateEventPage: React.FC = () => {
 								type="text"
 								placeholder="Location de votre événement"
 								name="location"
+                maxLength={32}
 								value={event.location}
 								onChange={handleChange}
 							/>
@@ -179,6 +190,7 @@ const CreateEventPage: React.FC = () => {
 								id="description"
 								placeholder="Décrivez votre événement"
 								name="description"
+                maxLength={256}
 								value={event.description}
 								onChange={handleChange}
 							></textarea>
