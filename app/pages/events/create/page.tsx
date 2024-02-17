@@ -112,31 +112,34 @@ const CreateEventPage: React.FC = () => {
 	};
 
 	const addLocationToFavorite = () => {
-    if (!event.location) {
-        alert('Location field is required and must be filled out.');
-        return; 
-    }
-    if (event.location.length > 32) {
-        alert('The name and location must not exceed 32 characters.');
-        return; 
-    }
+		if (!user?.id) {
+			alert('Must be logged in to save event, choose a test account.');
+			return;
+		}
+		if (!event.location) {
+			alert('Location field is required and must be filled out.');
+			return;
+		}
+		if (event.location.length > 32) {
+			alert('The name and location must not exceed 32 characters.');
+			return;
+		}
 
-    let favList = loadFromLocalStorage<string[]>('favList') || []; 
-    if (favList.includes(event.location)) {
-        alert('This location is already in your favorite.');
-        return; 
-    }
+		let favList = loadFromLocalStorage<string[]>('favList') || [];
+		if (favList.includes(event.location)) {
+			alert('This location is already in your favorite.');
+			return;
+		}
 
-    if (favList.length >= 15) {
-        alert('Maximum of 15 favorites, clear your cache to get new one.');
-        return; 
-    }
+		if (favList.length >= 15) {
+			alert('Maximum of 15 favorites, clear your cache to get new one.');
+			return;
+		}
 
-    // Add new location to favorites
-    favList.push(event.location);
-    saveToLocalStorage('favList', favList); 
-};
-
+		// Add new location to favorites
+		favList.push(event.location);
+		saveToLocalStorage('favList', favList);
+	};
 
 	const setLocationFromList = (location: string) => {
 		setEvent((prevEvent) => ({
