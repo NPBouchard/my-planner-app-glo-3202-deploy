@@ -3,8 +3,11 @@ import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import Format from '@/app/components/Format';
 import Cookies from 'js-cookie';
 import { MapPinIcon } from '@heroicons/react/16/solid';
-import {StarIcon} from '@heroicons/react/16/solid';
-import { loadFromLocalStorage } from '@/app/script/AccessToLocalStorage';
+import { StarIcon } from '@heroicons/react/16/solid';
+import {
+	loadFromLocalStorage,
+	saveToLocalStorage,
+} from '@/app/script/AccessToLocalStorage';
 
 interface Event {
 	name: string;
@@ -28,41 +31,47 @@ const CreateEventPage: React.FC = () => {
 		location: '',
 	});
 
+	const [favList, setFavList] = useState<string[] | null>(null);
+
 	useEffect(() => {
 		// Call loadEvents when the component mounts
 		const storedUser: User | null = loadFromLocalStorage<User>('selectedUser');
 		if (storedUser) {
 			setUser(storedUser);
 		}
+
+		const favList: string[] | null = loadFromLocalStorage<string[]>('favList');
+		if (favList) {
+			setFavList(favList);
+		}
 	}, []);
 
+	const handleChange = (
+		e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+	) => {
+		const { name, value } = e.target;
+		setEvent((prevState) => ({
+			...prevState,
+			[name]: value.slice(0, name === 'description' ? 256 : 32), // Enforcing limits directly in the handler as an additional measure
+		}));
+	};
 
-const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-) => {
-    const { name, value } = e.target;
-    setEvent((prevState) => ({
-        ...prevState,
-        [name]: value.slice(0, name === 'description' ? 256 : 32), // Enforcing limits directly in the handler as an additional measure
-    }));
-};
-
-const validateEvent = (event: Event): boolean => {
-    if (!event.name || !event.date || !event.description || !event.location) {
-        alert('All fields are required and must be filled out.');
-        return false;
-    }
-    if (event.name.length > 32 || event.location.length > 32) {
-        alert('The name and location must not exceed 32 characters.');
-        return false;
-    }
-    if (event.description.length > 256) {
-        alert('The description must not exceed 256 characters.');
-        return false;
-    }
-    // Additional validation checks can be added here
-    return true;
-};
+	const validateEvent = (event: Event): boolean => {
+		if (!event.name || !event.date || !event.description || !event.location) {
+			alert('All fields are required and must be filled out.');
+			return false;
+		}
+		if (event.name.length > 32 || event.location.length > 32) {
+			alert('The name and location must not exceed 32 characters.');
+			return false;
+		}
+		if (event.description.length > 256) {
+			alert('The description must not exceed 256 characters.');
+			return false;
+		}
+		// Additional validation checks can be added here
+		return true;
+	};
 
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -102,6 +111,29 @@ const validateEvent = (event: Event): boolean => {
 		}));
 	};
 
+	const addLocationToFavorite = () => {
+		let isOk = true;
+		if (!event.location) {
+			alert('Location field is required and must be filled out.');
+			isOk = false;
+		}
+		if (event.location.length > 32) {
+			alert('The name and location must not exceed 32 characters.');
+			isOk = false;
+		}
+
+		if (isOk) {
+			let favList: string[] | null = loadFromLocalStorage<string[]>('favList');
+			if (favList) {
+				favList.push(event.location);
+			} else {
+				favList = [event.location];
+			}
+
+			saveToLocalStorage('favList', favList);
+		}
+	};
+
 	return (
 		<Format>
 			<div className="max-w-4xl mx-auto px-4 py-8">
@@ -113,10 +145,9 @@ const validateEvent = (event: Event): boolean => {
 					>
 						Location Actuelle
 					</MapPinIcon>
-          <StarIcon
-          className="w-6 h-6 bg-blue-500 hover:bg-blue-700 text-white rounded">
-            Add to favorite
-          </StarIcon>
+					<StarIcon className="w-6 h-6 bg-blue-500 hover:bg-blue-700 text-white rounded">
+						Add to favorite
+					</StarIcon>
 				</h1>
 
 				<form
@@ -137,7 +168,7 @@ const validateEvent = (event: Event): boolean => {
 								type="text"
 								placeholder="Nom de votre événement"
 								name="name"
-                maxLength={32}
+								maxLength={32}
 								value={event.name}
 								onChange={handleChange}
 							/>
@@ -176,7 +207,7 @@ const validateEvent = (event: Event): boolean => {
 								type="text"
 								placeholder="Location de votre événement"
 								name="location"
-                maxLength={32}
+								maxLength={32}
 								value={event.location}
 								onChange={handleChange}
 							/>
@@ -195,7 +226,7 @@ const validateEvent = (event: Event): boolean => {
 								id="description"
 								placeholder="Décrivez votre événement"
 								name="description"
-                maxLength={256}
+								maxLength={256}
 								value={event.description}
 								onChange={handleChange}
 							></textarea>
