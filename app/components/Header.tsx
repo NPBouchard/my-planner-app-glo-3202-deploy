@@ -1,7 +1,10 @@
 'use client';
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
-import { saveToLocalStorage, loadFromLocalStorage } from '../script/AccessToLocalStorage';
+import {
+	saveToLocalStorage,
+	loadFromLocalStorage,
+} from '../script/AccessToLocalStorage';
 
 interface User {
 	id: string;
