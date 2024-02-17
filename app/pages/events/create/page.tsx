@@ -125,7 +125,11 @@ const CreateEventPage: React.FC = () => {
 		if (isOk) {
 			let favList: string[] | null = loadFromLocalStorage<string[]>('favList');
 			if (favList) {
-				favList.push(event.location);
+        if(favList.length <= 15){
+          favList.push(event.location);
+        } else {
+          alert("Maximum of 15 favorites, clear your cache to get new one.")
+        }
 			} else {
 				favList = [event.location];
 			}
