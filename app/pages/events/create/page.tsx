@@ -112,7 +112,7 @@ const CreateEventPage: React.FC = () => {
 	};
 
 	const addLocationToFavorite = () => {
-		if (!user?.id) {
+		if (!user) {
 			alert('Must be logged in to save event, choose a test account.');
 			return;
 		}
