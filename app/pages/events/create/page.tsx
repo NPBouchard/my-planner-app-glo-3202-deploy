@@ -57,6 +57,11 @@ const CreateEventPage: React.FC = () => {
 	};
 
 	const validateEvent = (event: Event): boolean => {
+		if (!user) {
+			alert('Must be logged in to save event, choose a test account.');
+			return false;
+		}
+		
 		if (!event.name || !event.date || !event.description || !event.location) {
 			alert('All fields are required and must be filled out.');
 			return false;
@@ -112,14 +117,11 @@ const CreateEventPage: React.FC = () => {
 	};
 
 	const addLocationToFavorite = () => {
-		if (!user) {
-			alert('Must be logged in to save event, choose a test account.');
-			return;
-		}
 		if (!event.location) {
 			alert('Location field is required and must be filled out.');
 			return;
 		}
+
 		if (event.location.length > 32) {
 			alert('The name and location must not exceed 32 characters.');
 			return;
