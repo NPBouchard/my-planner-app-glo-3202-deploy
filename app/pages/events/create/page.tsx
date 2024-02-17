@@ -112,40 +112,31 @@ const CreateEventPage: React.FC = () => {
 	};
 
 	const addLocationToFavorite = () => {
-		let isOk = true;
-		if (!event.location) {
-			alert('Location field is required and must be filled out.');
-			isOk = false;
-		}
-		if (event.location.length > 32) {
-			alert('The name and location must not exceed 32 characters.');
-			isOk = false;
-		}
+    if (!event.location) {
+        alert('Location field is required and must be filled out.');
+        return; 
+    }
+    if (event.location.length > 32) {
+        alert('The name and location must not exceed 32 characters.');
+        return; 
+    }
 
-		if (isOk) {
-			let favList: string[] | null = loadFromLocalStorage<string[]>('favList');
-      let notPresent = true;
-			if (favList) {
-        favList.map(fav => {
-          if (fav == event.location){
-            alert('This location is already in your favorite.');
-            notPresent = false;
-            return;
-          }
-        })
+    let favList = loadFromLocalStorage<string[]>('favList') || []; 
+    if (favList.includes(event.location)) {
+        alert('This location is already in your favorite.');
+        return; 
+    }
 
-				if (favList.length <= 15) {
-					favList.push(event.location);
-				} else {
-					alert('Maximum of 15 favorites, clear your cache to get new one.');
-				}
-			} else {
-				favList = [event.location];
-			}
+    if (favList.length >= 15) {
+        alert('Maximum of 15 favorites, clear your cache to get new one.');
+        return; 
+    }
 
-			saveToLocalStorage('favList', favList);
-		}
-	};
+    // Add new location to favorites
+    favList.push(event.location);
+    saveToLocalStorage('favList', favList); 
+};
+
 
 	const setLocationFromList = (location: string) => {
 		setEvent((prevEvent) => ({
@@ -277,7 +268,7 @@ const CreateEventPage: React.FC = () => {
 								>
 									<div className="flex items-center">
 										<MapPinIcon
-											className="w-5 h-5 mr-2 text-blue-500"
+											className="w-5 h-5 bg-blue-500 hover:bg-blue-700 text-white rounded"
 											onClick={() => setLocationFromList(location)}
 										/>
 										<span>{location}</span>
