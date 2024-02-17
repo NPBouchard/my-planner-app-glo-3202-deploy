@@ -124,7 +124,16 @@ const CreateEventPage: React.FC = () => {
 
 		if (isOk) {
 			let favList: string[] | null = loadFromLocalStorage<string[]>('favList');
+      let notPresent = true;
 			if (favList) {
+        favList.map(fav => {
+          if (fav == event.location){
+            alert('This location is already in your favorite.');
+            notPresent = false;
+            return;
+          }
+        })
+
 				if (favList.length <= 15) {
 					favList.push(event.location);
 				} else {
