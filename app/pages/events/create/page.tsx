@@ -138,12 +138,12 @@ const CreateEventPage: React.FC = () => {
 		}
 	};
 
-  const useLocationFromList = (location: string) => {
+  const useLocationFromList = (location : string) => {
     setEvent((prevEvent) => ({
 			...prevEvent,
-			location: location,
+			location,
 		}));
-  }
+  };
 
 	return (
 		<Format>
@@ -266,8 +266,8 @@ const CreateEventPage: React.FC = () => {
 									key={index}
 									className="mb-2"
 								>
-									<div className="flex items-center" onClick={() => useLocationFromList(location)} >
-										<MapPinIcon className="w-5 h-5 mr-2 text-blue-500" />
+									<div className="flex items-center">
+										<MapPinIcon className="w-5 h-5 mr-2 text-blue-500"  onClick={() => useLocationFromList(location)}/>
 										<span>{location}</span>
 									</div>
 								</li>
