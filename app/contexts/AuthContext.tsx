@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { AuthContextType, User } from '../types'; // Assuming you have defined these types
 import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
@@ -15,6 +16,7 @@ interface AuthProviderProps {
 export const AuthProvider = ({ children }: AuthProviderProps) => {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true); // Add a loading state
+    const router = useRouter();
 
 
     useEffect(() => {
@@ -45,6 +47,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
             const userData: User = { username: data.username }; // Adapt based on actual response structure
             setUser(userData);
             sessionStorage.setItem('user', JSON.stringify(userData)); // Persist user session in sessionStorage
+            router.push("/")
         } catch (error) {
             console.error('Login error:', error);
             // Handle login errors, e.g., by setting an error state or showing a message
@@ -54,7 +57,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     const signOut = () => {
         setUser(null);
         sessionStorage.removeItem('user');
-        redirect('/pages/signin')
+        router.push("/pages/signin")
     };
 
     return (
