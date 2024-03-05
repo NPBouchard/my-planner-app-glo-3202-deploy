@@ -5,11 +5,34 @@ import Link from 'next/link';
 const SignUp = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState({ username: '', password: '' });
+
+  const validateForm = () => {
+    let isValid = true;
+    const newErrors = { username: '', password: '' };
+
+    // Username validation: non-empty and at least 3 characters long
+    if (!username || username.length < 3) {
+        newErrors.username = 'Username must be at least 3 characters long.';
+        isValid = false;
+    }
+
+    // Password validation: non-empty, at least 8 characters, includes a number and an uppercase letter
+    if (!password || password.length < 8 || !/\d/.test(password) || !/[A-Z]/.test(password)) {
+        newErrors.password = 'Password must be at least 8 characters long, include a number, and an uppercase letter.';
+        isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		// Add logic to submit these details to your backend
-		console.log(username, password);
+		
+    if (!validateForm()) {
+      return; 
+    }
 
 		await sendQuerySignUp();
 	};
@@ -73,6 +96,7 @@ const SignUp = () => {
 					className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
 				/>
 			</div>
+      {errors.password && <p className="text-red-500 text-xs italic">{errors.password}</p>}
 			<div className="flex justify-between items-center">
 				<button
 					type="submit"
