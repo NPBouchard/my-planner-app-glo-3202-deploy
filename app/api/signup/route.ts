@@ -24,7 +24,7 @@ export async function POST(req: any) {
   try {
     // Check if the username already exists
     const existingUser = await sql`SELECT * FROM users WHERE username = ${username} LIMIT 1`;
-    if (existingUser) { // Adjust based on how your SQL library returns results
+    if (existingUser.rowCount > 0) { // Adjust based on how your SQL library returns results
       // User already exists, return an error
       return new Response(JSON.stringify({ error: 'Username is already taken. Please choose another.' }), {
         status: 409, // Conflict status
