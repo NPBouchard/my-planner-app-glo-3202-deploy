@@ -42,7 +42,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
             const userData: User = { username: data.username }; // Adapt based on actual response structure
             setUser(userData);
             sessionStorage.setItem('user', JSON.stringify(userData)); // Persist user session in sessionStorage
-            redirect('/')
         } catch (error) {
             console.error('Login error:', error);
             // Handle login errors, e.g., by setting an error state or showing a message
