@@ -53,7 +53,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     const signOut = () => {
         setUser(null);
         sessionStorage.removeItem('user');
-        router.push('/signin'); // Redirect to sign-in page on logout
+        router.push('/pages/signin'); // Redirect to sign-in page on logout
     };
 
     return (

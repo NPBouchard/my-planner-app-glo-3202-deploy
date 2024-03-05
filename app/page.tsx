@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import Link from 'next/link';
 import EventList from './script/EventList';
 import Cookies from 'js-cookie';
+import { useRequireAuth } from './hooks/useRequireAuth';
 
 function getLocation(): Promise<GeolocationPosition> {
 	return new Promise((resolve, reject) => {
@@ -43,6 +44,10 @@ const Page: React.FC = () => {
 		}
 	}, []);
 
+	const user = useRequireAuth();
+
+	if(!user) return null;
+	
 	return (
 		<Format>
 			<div className="max-w-6xl mx-auto px-4 py-8">
