@@ -11,21 +11,28 @@ const SignUp = () => {
     let isValid = true;
     const newErrors = { username: '', password: '' };
 
-    // Username validation: non-empty and at least 3 characters long
+    // Username validation: non-empty, at least 3 characters, and no more than 24 characters long
     if (!username || username.length < 3) {
         newErrors.username = 'Username must be at least 3 characters long.';
         isValid = false;
+    } else if (username.length > 24) {
+        newErrors.username = 'Username must be no more than 24 characters long.';
+        isValid = false;
     }
 
-    // Password validation: non-empty, at least 8 characters, includes a number and an uppercase letter
+    // Password validation: non-empty, at least 8 characters, includes a number, an uppercase letter, and no more than 24 characters
     if (!password || password.length < 8 || !/\d/.test(password) || !/[A-Z]/.test(password)) {
         newErrors.password = 'Password must be at least 8 characters long, include a number, and an uppercase letter.';
+        isValid = false;
+    } else if (password.length > 24) {
+        newErrors.password = 'Password must be no more than 24 characters long.';
         isValid = false;
     }
 
     setErrors(newErrors);
     return isValid;
   };
+
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
