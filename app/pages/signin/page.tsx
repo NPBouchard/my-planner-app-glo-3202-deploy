@@ -1,7 +1,6 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
 import { useAuth } from '@/app/contexts/AuthContext';
 
 
@@ -16,7 +15,6 @@ const SignIn = () => {
 
         try {
             await auth.signIn(username, password); // Use the signIn method from AuthContext
-            redirect('/');
         } catch (error) {
             console.error('Login error:', error);
             setErrorMessage('Failed to sign in. Please check your credentials.'); // Adjust the error message as necessary
