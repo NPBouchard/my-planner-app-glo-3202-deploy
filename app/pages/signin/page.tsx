@@ -9,7 +9,7 @@ const Login = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const response = await fetch('/api/login', {
+    const response = await fetch(`https://my-planner-app-glo-3202-deploy.vercel.app/api/signin`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
