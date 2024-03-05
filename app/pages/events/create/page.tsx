@@ -23,10 +23,6 @@ interface User {
 }
 
 const CreateEventPage: React.FC = () => {
-	const userTemp = useRequireAuth();
-
-	if(!userTemp) return null;
-
 	const [user, setUser] = useState<User | null>(null);
 
 	const [event, setEvent] = useState<Event>({
@@ -37,7 +33,7 @@ const CreateEventPage: React.FC = () => {
 	});
 
 	const [favList, setFavList] = useState<string[] | null>(null);
-
+	
 	useEffect(() => {
 		// Call loadEvents when the component mounts
 		const storedUser: User | null = loadFromLocalStorage<User>('selectedUser');
@@ -50,6 +46,10 @@ const CreateEventPage: React.FC = () => {
 			setFavList(favList);
 		}
 	}, []);
+
+	const userTemp = useRequireAuth();
+
+	if(!userTemp) return null;
 
 	const handleChange = (
 		e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
