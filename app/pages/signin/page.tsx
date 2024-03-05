@@ -1,36 +1,27 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useAuth } from '@/app/contexts/AuthContext';
 
-const Login = () => {
+
+const SignIn = () => {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
+    const auth = useAuth(); // Use the useAuth hook to access signIn
+    const router = useRouter();
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
+        event.preventDefault();
 
-		const response = await fetch(
-			`https://my-planner-app-glo-3202-deploy.vercel.app/api/signin`,
-			{
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ username, password }),
-			}
-		);
-
-		const data = await response.json();
-		if (response.ok) {
-			console.log('Login successful:', data);
-			// Redirect or handle login success (e.g., set user context, redirect to dashboard)
-		} else {
-			console.error('Login error:', data.error);
-			setErrorMessage(data.error);
-		}
-	};
-
+        try {
+            await auth.signIn(username, password); // Use the signIn method from AuthContext
+        } catch (error) {
+            console.error('Login error:', error);
+            setErrorMessage('Failed to sign in. Please check your credentials.'); // Adjust the error message as necessary
+        }
+    };
 	return (
 		<form
 			onSubmit={handleSubmit}
@@ -88,4 +79,4 @@ const Login = () => {
 	);
 };
 
-export default Login;
+export default SignIn;

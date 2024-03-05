@@ -4,3 +4,14 @@ export interface IEventForm {
 	eventDescription: string;
 	eventLocation: string;
 }
+
+export interface User {
+	username: string;
+	// Add other user properties as needed
+  }
+  
+  export interface AuthContextType {
+	user: User | null;
+	signIn: (username: string, password: string) => void;
+	signOut: () => void;
+  }
