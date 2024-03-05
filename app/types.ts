@@ -14,4 +14,5 @@ export interface User {
 	user: User | null;
 	signIn: (username: string, password: string) => void;
 	signOut: () => void;
+	loading: boolean;
   }

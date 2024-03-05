@@ -6,7 +6,7 @@ export const useRequireAuth = (redirectTo: string = '/pages/signin') => {
     const auth = useAuth();
 
     useEffect(() => {
-        if (auth.user === null) {
+        if (!auth.loading && auth.user === null) {
             redirect(redirectTo);
         }
     }, [auth, redirect, redirectTo]);

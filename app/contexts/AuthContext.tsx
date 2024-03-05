@@ -14,6 +14,8 @@ interface AuthProviderProps {
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
     const [user, setUser] = useState<User | null>(null);
+    const [loading, setLoading] = useState(true); // Add a loading state
+
 
     useEffect(() => {
         // Attempt to retrieve the user from sessionStorage on initial load
@@ -21,6 +23,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         if (sessionUser) {
             setUser(JSON.parse(sessionUser));
         }
+        setLoading(false);
     }, []);
 
     const signIn = async (username: string, password: string) => {
@@ -55,7 +58,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, signIn, signOut }}>
+        <AuthContext.Provider value={{ user, signIn, signOut, loading }}>
             {children}
         </AuthContext.Provider>
     );
