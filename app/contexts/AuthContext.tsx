@@ -1,8 +1,8 @@
 // contexts/AuthContext.tsx
 'use client'
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { useRouter } from 'next/router';
 import { AuthContextType, User } from '../types'; // Assuming you have defined these types
+import { redirect } from 'next/navigation';
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
@@ -14,7 +14,6 @@ interface AuthProviderProps {
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
     const [user, setUser] = useState<User | null>(null);
-    const router = useRouter(); // Use Next.js router for potential redirects after login
 
     useEffect(() => {
         // Attempt to retrieve the user from sessionStorage on initial load
@@ -43,7 +42,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
             const userData: User = { username: data.username }; // Adapt based on actual response structure
             setUser(userData);
             sessionStorage.setItem('user', JSON.stringify(userData)); // Persist user session in sessionStorage
-            router.push('/'); // Redirect to dashboard or other page on successful login
         } catch (error) {
             console.error('Login error:', error);
             // Handle login errors, e.g., by setting an error state or showing a message
@@ -53,7 +51,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     const signOut = () => {
         setUser(null);
         sessionStorage.removeItem('user');
-        router.push('/pages/signin'); // Redirect to sign-in page on logout
+        redirect('/pages/signin')
     };
 
     return (

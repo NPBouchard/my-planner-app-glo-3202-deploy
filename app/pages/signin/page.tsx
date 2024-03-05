@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { redirect } from 'next/navigation';
 import { useAuth } from '@/app/contexts/AuthContext';
 
 
@@ -10,13 +10,13 @@ const SignIn = () => {
 	const [password, setPassword] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
     const auth = useAuth(); // Use the useAuth hook to access signIn
-    const router = useRouter();
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         try {
             await auth.signIn(username, password); // Use the signIn method from AuthContext
+            redirect('/');
         } catch (error) {
             console.error('Login error:', error);
             setErrorMessage('Failed to sign in. Please check your credentials.'); // Adjust the error message as necessary

@@ -1,16 +1,15 @@
 import { useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { redirect } from 'next/navigation'
 import { useAuth } from '../contexts/AuthContext';
 
 export const useRequireAuth = (redirectTo: string = '/pages/signin') => {
     const auth = useAuth();
-    const router = useRouter();
 
     useEffect(() => {
         if (auth.user === null) {
-            router.push(redirectTo);
+            redirect(redirectTo);
         }
-    }, [auth, router, redirectTo]);
+    }, [auth, redirect, redirectTo]);
 
     return auth.user;
 };
