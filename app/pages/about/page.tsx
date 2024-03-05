@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import Format from '@/app/components/Format';
 import { useRequireAuth } from '@/app/hooks/useRequireAuth';
