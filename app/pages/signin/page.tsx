@@ -14,7 +14,8 @@ const SignIn = () => {
         event.preventDefault();
 
         try {
-            await auth.signIn(username, password); // Use the signIn method from AuthContext
+            await auth.signIn(username, password);
+            console.log("success") // Use the signIn method from AuthContext
         } catch (error) {
             console.error('Login error:', error);
             setErrorMessage('Failed to sign in. Please check your credentials.'); // Adjust the error message as necessary
