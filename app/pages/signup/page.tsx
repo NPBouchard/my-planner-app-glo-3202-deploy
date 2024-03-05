@@ -104,6 +104,7 @@ const SignUp = () => {
 				/>
 			</div>
       {errors.password && <p className="text-red-500 text-xs italic">{errors.password}</p>}
+      {errors.username && <p className="text-red-500 text-xs italic">{errors.username}</p>}
 			<div className="flex justify-between items-center">
 				<button
 					type="submit"
