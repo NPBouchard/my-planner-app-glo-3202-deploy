@@ -73,6 +73,11 @@ const SignIn = () => {
 						No account? Sign Up
 					</a>
 				</Link>
+                <Link href="/pages/about">
+					<a className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
+						About us!
+					</a>
+				</Link>
 			</div>
 		</form>
 	);

@@ -1,12 +1,8 @@
 'use client'
 import React from 'react';
 import Format from '@/app/components/Format';
-import { useRequireAuth } from '@/app/hooks/useRequireAuth';
 
 const AboutPage: React.FC = () => {
-	const user = useRequireAuth();
-
-	if(!user) return null;
 	return (
 		<Format>
 			<div className="max-w-4xl mx-auto px-4 py-8">
