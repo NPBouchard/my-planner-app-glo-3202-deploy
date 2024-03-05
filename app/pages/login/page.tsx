@@ -9,7 +9,31 @@ const SignUp = () => {
     event.preventDefault();
     // Add logic to submit these details to your backend
     console.log(username, password);
+
+    await sendQuerySignUp();
   };
+
+  async function sendQuerySignUp() {
+    await fetch(
+      `https://my-planner-app-glo-3202-deploy.vercel.app/api/signup`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }), // Correctly passing username and password
+      }
+    )
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      // Handle success, such as showing a success message or redirecting
+    })
+    .catch((error) => {
+      console.error('Error during sign up: ', error);
+      // Handle error, such as showing an error message to the user
+    });
+  }
 
   return (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto my-8 p-4 border rounded-lg shadow">
