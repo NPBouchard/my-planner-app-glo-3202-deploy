@@ -8,6 +8,7 @@ import {
 	loadFromLocalStorage,
 	saveToLocalStorage,
 } from '@/app/script/AccessToLocalStorage';
+import { useRequireAuth } from '@/app/hooks/useRequireAuth';
 
 interface Event {
 	name: string;
@@ -22,6 +23,10 @@ interface User {
 }
 
 const CreateEventPage: React.FC = () => {
+	const userTemp = useRequireAuth();
+
+	if(!userTemp) return null;
+
 	const [user, setUser] = useState<User | null>(null);
 
 	const [event, setEvent] = useState<Event>({
