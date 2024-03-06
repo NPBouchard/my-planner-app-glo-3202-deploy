@@ -1,39 +1,9 @@
 'use client';
 import Link from 'next/link';
-import React, { useState, useEffect } from 'react';
-import {
-	saveToLocalStorage,
-	loadFromLocalStorage,
-} from '../script/AccessToLocalStorage';
-import { User } from '../types';
-import { useRequireAuth } from '../hooks/useRequireAuth';
+import React from 'react';
 
 
 const Header: React.FC = () => {
-
-	const user = useRequireAuth();
-
-	// const loadUsers = async () => {
-	// 	await fetch(`https://my-planner-app-glo-3202-deploy.vercel.app/api/users`, {
-	// 		method: 'GET',
-	// 		headers: {
-	// 			'content-type': 'application/json',
-	// 		},
-	// 	})
-	// 		.then((res) => res.json())
-	// 		.then((data) => {
-	// 			console.log(data.rows);
-	// 			setUsers(data.rows);
-	// 		})
-	// 		.catch((error) => {
-	// 			console.error('Error fetching events: ', error);
-	// 		});
-	// };
-
-	// const handleSelectUser = (user: User) => {
-	// 	setSelectedUser(user);
-	// 	saveToLocalStorage('selectedUser', user);
-	// };
 	return (
 		<header className="bg-blue-500 text-white body-font shadow w-full">
 			<div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
@@ -80,7 +50,7 @@ const Header: React.FC = () => {
 					</Link>
 					<div className="relative">
 						<button className="mr-5 hover:text-gray-900 focus:outline-none">
-							{user ? user.username : 'Connect'}
+							Connect
 						</button>
 					</div>
 				</nav>
