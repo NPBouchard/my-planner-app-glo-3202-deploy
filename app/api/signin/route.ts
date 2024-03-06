@@ -34,7 +34,7 @@ export async function POST(req: any) {
 
     console.log('Login successful.');
     // Proceed to set up session/login token here
-    return new Response(JSON.stringify({ message: 'Login successful.' }), {
+    return new Response(JSON.stringify({ message: 'Login successful.', username: user.username, id: user.id }), {
       status: 200,
       headers: {
         'Content-Type': 'application/json',

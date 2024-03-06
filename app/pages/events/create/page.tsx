@@ -9,7 +9,6 @@ import {
 	saveToLocalStorage,
 } from '@/app/script/AccessToLocalStorage';
 import { useRequireAuth } from '@/app/hooks/useRequireAuth';
-import { User } from '@/app/types';
 
 interface Event {
 	name: string;
@@ -79,7 +78,6 @@ const CreateEventPage: React.FC = () => {
 
 		if (validateEvent(event)) {
 			sendQuery();
-			console.log('Event Created:', event.name);
 		}
 	};
 
