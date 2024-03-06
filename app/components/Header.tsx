@@ -1,9 +1,12 @@
 'use client';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useAuth } from '../contexts/AuthContext';
 
 
 const Header: React.FC = () => {
+	const auth = useAuth();
+
 	return (
 		<header className="bg-blue-500 text-white body-font shadow w-full">
 			<div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
@@ -50,7 +53,7 @@ const Header: React.FC = () => {
 					</Link>
 					<div className="relative">
 						<button className="mr-5 hover:text-gray-900 focus:outline-none">
-							Connect
+							{auth.user ? auth.user.username : "Connect"}
 						</button>
 					</div>
 				</nav>
