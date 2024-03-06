@@ -5,11 +5,8 @@ import {
 	saveToLocalStorage,
 	loadFromLocalStorage,
 } from '../script/AccessToLocalStorage';
+import { User } from '../types';
 
-interface User {
-	id: string;
-	username: string;
-}
 
 const Header: React.FC = () => {
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
