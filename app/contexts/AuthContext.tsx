@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
             const data = await response.json();
             // Assuming the response includes the username or other user data
-            const userData: User = { username: data.username }; // Adapt based on actual response structure
+            const userData: User = { username: data.username, id: data.id }; // Adapt based on actual response structure
             setUser(userData);
             sessionStorage.setItem('user', JSON.stringify(userData)); // Persist user session in sessionStorage
             router.push("/")

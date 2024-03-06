@@ -9,6 +9,7 @@ import {
 	saveToLocalStorage,
 } from '@/app/script/AccessToLocalStorage';
 import { useRequireAuth } from '@/app/hooks/useRequireAuth';
+import { User } from '@/app/types';
 
 interface Event {
 	name: string;
@@ -17,10 +18,6 @@ interface Event {
 	location: string;
 }
 
-interface User {
-	id: string;
-	username: string;
-}
 
 const CreateEventPage: React.FC = () => {
 	const [user, setUser] = useState<User | null>(null);
@@ -33,14 +30,13 @@ const CreateEventPage: React.FC = () => {
 	});
 
 	const [favList, setFavList] = useState<string[] | null>(null);
-	
+
 	useEffect(() => {
 		// Call loadEvents when the component mounts
-		const storedUser: User | null = loadFromLocalStorage<User>('selectedUser');
-		if (storedUser) {
-			setUser(storedUser);
-		}
-
+		const sessionUser = sessionStorage.getItem('user');
+        if (sessionUser) {
+            setUser(JSON.parse(sessionUser));
+        }
 		const favList: string[] | null = loadFromLocalStorage<string[]>('favList');
 		if (favList) {
 			setFavList(favList);

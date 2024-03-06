@@ -1,10 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-
-interface User {
-	id: string;
-	username: string;
-}
+import { User } from '../types';
 
 export default function EventList() {
 	const [events, setEvents] = useState([]);

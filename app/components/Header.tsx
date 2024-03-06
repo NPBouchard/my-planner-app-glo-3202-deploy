@@ -17,12 +17,9 @@ const Header: React.FC = () => {
 	const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
 	useEffect(() => {
-		loadUsers();
-
-		const storedUser: User | null = loadFromLocalStorage<User>('selectedUser');
-
-		if (storedUser) {
-			setSelectedUser(storedUser);
+		const sessionUser = sessionStorage.getItem('user');
+		if (sessionUser) {
+			setSelectedUser(JSON.parse(sessionUser));
 		}
 	}, []);
 
@@ -96,25 +93,9 @@ const Header: React.FC = () => {
 						<a className="mr-5 hover:text-gray-900">Create Event</a>
 					</Link>
 					<div className="relative">
-						<button
-							onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-							className="mr-5 hover:text-gray-900 focus:outline-none"
-						>
+						<button className="mr-5 hover:text-gray-900 focus:outline-none">
 							{selectedUser ? selectedUser.username : 'Connect'}
 						</button>
-						{isDropdownOpen && (
-							<div className="absolute left-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
-								{users.map((user: User, index) => (
-									<button
-										key={index}
-										onClick={() => handleSelectUser(user)}
-										className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-									>
-										{user.username}
-									</button>
-								))}
-							</div>
-						)}
 					</div>
 				</nav>
 			</div>
