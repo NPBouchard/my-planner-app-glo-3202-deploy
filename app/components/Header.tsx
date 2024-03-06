@@ -10,13 +10,8 @@ import { useRequireAuth } from '../hooks/useRequireAuth';
 
 
 const Header: React.FC = () => {
-	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-	const [users, setUsers] = useState<User[]>([]);
-	const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
 	const user = useRequireAuth();
-
-	if(!user) return null;
 
 	// const loadUsers = async () => {
 	// 	await fetch(`https://my-planner-app-glo-3202-deploy.vercel.app/api/users`, {
@@ -85,7 +80,6 @@ const Header: React.FC = () => {
 					</Link>
 					<div className="relative">
 						<button className="mr-5 hover:text-gray-900 focus:outline-none">
-							{selectedUser ? selectedUser.username : 'Connect'}
 							{user ? user.username : 'Connect'}
 						</button>
 					</div>
