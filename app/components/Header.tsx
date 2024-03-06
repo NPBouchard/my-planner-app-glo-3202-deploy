@@ -17,8 +17,6 @@ const Header: React.FC = () => {
 	const user = useRequireAuth();
 
 	if(!user) return null;
-	
-	setSelectedUser(user);
 
 	// const loadUsers = async () => {
 	// 	await fetch(`https://my-planner-app-glo-3202-deploy.vercel.app/api/users`, {
@@ -88,6 +86,7 @@ const Header: React.FC = () => {
 					<div className="relative">
 						<button className="mr-5 hover:text-gray-900 focus:outline-none">
 							{selectedUser ? selectedUser.username : 'Connect'}
+							{user ? user.username : 'Connect'}
 						</button>
 					</div>
 				</nav>
