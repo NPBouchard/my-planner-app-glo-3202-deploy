@@ -47,7 +47,7 @@ const Page: React.FC = () => {
 	const user = useRequireAuth();
 
 	if(!user) return null;
-	
+
 	return (
 		<Format>
 			<div className="max-w-6xl mx-auto px-4 py-8">

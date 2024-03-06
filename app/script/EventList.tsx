@@ -1,6 +1,5 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { loadFromLocalStorage } from './AccessToLocalStorage';
 
 interface User {
 	id: string;
@@ -11,10 +10,10 @@ export default function EventList() {
 	const [events, setEvents] = useState([]);
 	const [user, setUser] = useState<User | null>(null);
 	useEffect(() => {
-		const storedUser: User | null = loadFromLocalStorage<User>('selectedUser');
-		if (storedUser) {
-			setUser(storedUser);
-		}
+		const sessionUser = sessionStorage.getItem('user');
+        if (sessionUser) {
+            setUser(JSON.parse(sessionUser));
+        }
 	}, []);
 
 	useEffect(() => {
