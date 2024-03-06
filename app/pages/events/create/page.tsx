@@ -20,7 +20,7 @@ interface Event {
 
 
 const CreateEventPage: React.FC = () => {
-	const [user, setUser] = useState<User | null>(null);
+	//const [user, setUser] = useState<User | null>(null);
 
 	const [event, setEvent] = useState<Event>({
 		name: '',
@@ -32,20 +32,15 @@ const CreateEventPage: React.FC = () => {
 	const [favList, setFavList] = useState<string[] | null>(null);
 
 	useEffect(() => {
-		// Call loadEvents when the component mounts
-		const sessionUser = sessionStorage.getItem('user');
-        if (sessionUser) {
-            setUser(JSON.parse(sessionUser));
-        }
 		const favList: string[] | null = loadFromLocalStorage<string[]>('favList');
 		if (favList) {
 			setFavList(favList);
 		}
 	}, []);
 
-	const userTemp = useRequireAuth();
+	const user = useRequireAuth();
 
-	if(!userTemp) return null;
+	if(!user) return null;
 
 	const handleChange = (
 		e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
