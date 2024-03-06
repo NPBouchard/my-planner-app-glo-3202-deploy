@@ -12,18 +12,12 @@ const Header: React.FC = () => {
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 	const [users, setUsers] = useState<User[]>([]);
 	const [selectedUser, setSelectedUser] = useState<User | null>(null);
-
-	useEffect(() => {
-		const sessionUser = sessionStorage.getItem('user');
+	
+	const sessionUser = sessionStorage.getItem('user');
 		if (sessionUser) {
 			setSelectedUser(JSON.parse(sessionUser));
 		}
-	}, []);
-
-	useEffect(() => {
-		setIsDropdownOpen(false);
-	}, [selectedUser]);
-
+	
 	const loadUsers = async () => {
 		await fetch(`https://my-planner-app-glo-3202-deploy.vercel.app/api/users`, {
 			method: 'GET',

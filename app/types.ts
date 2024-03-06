@@ -7,7 +7,7 @@ export interface IEventForm {
 
 export interface User {
 	username: string;
-	id: number;
+	id: string;
 	// Add other user properties as needed
   }
   
