@@ -6,39 +6,41 @@ import {
 	loadFromLocalStorage,
 } from '../script/AccessToLocalStorage';
 import { User } from '../types';
+import { useRequireAuth } from '../hooks/useRequireAuth';
 
 
 const Header: React.FC = () => {
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 	const [users, setUsers] = useState<User[]>([]);
 	const [selectedUser, setSelectedUser] = useState<User | null>(null);
-	
-	const sessionUser = sessionStorage.getItem('user');
-		if (sessionUser) {
-			setSelectedUser(JSON.parse(sessionUser));
-		}
-	
-	const loadUsers = async () => {
-		await fetch(`https://my-planner-app-glo-3202-deploy.vercel.app/api/users`, {
-			method: 'GET',
-			headers: {
-				'content-type': 'application/json',
-			},
-		})
-			.then((res) => res.json())
-			.then((data) => {
-				console.log(data.rows);
-				setUsers(data.rows);
-			})
-			.catch((error) => {
-				console.error('Error fetching events: ', error);
-			});
-	};
 
-	const handleSelectUser = (user: User) => {
-		setSelectedUser(user);
-		saveToLocalStorage('selectedUser', user);
-	};
+	const user = useRequireAuth();
+
+	if(!user) return null;
+	
+	setSelectedUser(user);
+
+	// const loadUsers = async () => {
+	// 	await fetch(`https://my-planner-app-glo-3202-deploy.vercel.app/api/users`, {
+	// 		method: 'GET',
+	// 		headers: {
+	// 			'content-type': 'application/json',
+	// 		},
+	// 	})
+	// 		.then((res) => res.json())
+	// 		.then((data) => {
+	// 			console.log(data.rows);
+	// 			setUsers(data.rows);
+	// 		})
+	// 		.catch((error) => {
+	// 			console.error('Error fetching events: ', error);
+	// 		});
+	// };
+
+	// const handleSelectUser = (user: User) => {
+	// 	setSelectedUser(user);
+	// 	saveToLocalStorage('selectedUser', user);
+	// };
 	return (
 		<header className="bg-blue-500 text-white body-font shadow w-full">
 			<div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">

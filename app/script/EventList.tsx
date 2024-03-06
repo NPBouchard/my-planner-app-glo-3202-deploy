@@ -5,6 +5,7 @@ import { User } from '../types';
 export default function EventList() {
 	const [events, setEvents] = useState([]);
 	const [user, setUser] = useState<User | null>(null);
+	
 	useEffect(() => {
 		const sessionUser = sessionStorage.getItem('user');
         if (sessionUser) {
